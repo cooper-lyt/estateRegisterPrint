@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <b:row style="padding-top: 30px;">
+        <b:column colMd="12" pt:role="main" hidden="sm" styleClass="operation-list">
+
+            <div class="account-fun">
+            <b:dropButton value="#{identity.account.firstName} #{identity.account.lastName}">
+                <b:navLink iconAwesome="key" value="修改密码" href="#"></b:navLink>
+                <b:navLink iconAwesome="cog" value="帐户设置" href="#"></b:navLink>
+            </b:dropButton>
+            </div>
+
+
+        </b:column>
+    </b:row>
+
+</ui:composition>

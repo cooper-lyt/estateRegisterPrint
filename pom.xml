@@ -8,6 +8,11 @@
     <artifactId>estateRegisterPrint</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <packaging>war</packaging>
+
+    <name>estateRegisterPrint</name>
+    <description>estateRegisterPrint</description>
+    <url>http://maven.apache.org</url>
     <repositories>
 
     </repositories>
@@ -300,7 +305,7 @@
                         </manifest>
                     </archive>
                     <warName>estateRegisterPrint</warName>
-                    <webappDirectory>${project.build.directory}/estateRegisterPrint.war/</webappDirectory>
+                    <webappDirectory>${project.build.directory}/estateRegisterPrint_SNAPSHOT.war/</webappDirectory>
                 </configuration>
             </plugin>
 
