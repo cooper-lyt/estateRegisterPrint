@@ -25,6 +25,7 @@ public class PowerCard implements java.io.Serializable{
 
     private CardStatus status;
     private OwnerType ownerType;
+    private String number;
 
     private Set<HouseInfo> houseInfos = new HashSet<HouseInfo>(0);
     private Set<Persion> persions = new HashSet<Persion>(0);
@@ -33,8 +34,10 @@ public class PowerCard implements java.io.Serializable{
     public PowerCard() {
     }
 
-    public PowerCard(OwnerType ownerType) {
+
+    public PowerCard(OwnerType ownerType, CardStatus status) {
         this.ownerType = ownerType;
+        this.status = status;
     }
 
     @Id
@@ -47,6 +50,16 @@ public class PowerCard implements java.io.Serializable{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Column(name = "NUMBER", length = 100)
+    @Size(max = 100)
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Enumerated(EnumType.STRING)

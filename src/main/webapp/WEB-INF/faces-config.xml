@@ -29,7 +29,7 @@
 
 -->
         <resource-bundle>
-            <base-name>cc.coopersoft.estate.Messages</base-name>
+            <base-name>cc.coopersoft.common.Messages</base-name>
             <var>messages</var>
         </resource-bundle>
 

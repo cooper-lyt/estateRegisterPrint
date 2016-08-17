@@ -42,10 +42,7 @@
 
         </h:outputScript>
 
-        <f:metadata>
-            <o:viewAction action="#{createSingleHousePowerCard.begin}" onPostback="false"/>
 
-        </f:metadata>
     </ui:define>
 
     <b:messages globalOnly="false" styleClass="top-messages"/>
@@ -88,14 +85,14 @@
 
                 <ui:repeat value="#{powerCardHome.personList}" var="_person">
                     <b:panel>
-                        <h:inputText value="#{_person.number}" label="身份证号" required="true"/>
+                        <b:inputText value="#{_person.number}" label="身份证号" required="true"/>
                         <b:message/>
-                        <h:inputText value="#{_person.name}" label="姓名" required="true"/>
+                        <b:inputText value="#{_person.name}" label="姓名" required="true"/>
                         <b:message/>
-                        <h:inputText value="#{_person.poolArea}" label="共有面积" required="true"
+                        <b:inputText value="#{_person.poolArea}" label="共有面积" required="true"
                                      rendered="#{(powerCardHome.instance.ownerType eq 'POOL_PER')}">
                             <f:convertNumber pattern="#0.00"/>
-                        </h:inputText>
+                        </b:inputText>
                         <b:message/>
 
                     </b:panel>

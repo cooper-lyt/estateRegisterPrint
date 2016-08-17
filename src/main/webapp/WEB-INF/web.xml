@@ -15,6 +15,12 @@
   </context-param>
 
 
+    <servlet-mapping>
+      <servlet-name>javax.ws.rs.core.Application</servlet-name>
+      <url-pattern>/interfaces/*</url-pattern>
+    </servlet-mapping>
+
+
   <context-param>
     <param-name>net.bootsfaces.get_jquery_from_cdn</param-name>
     <param-value>false</param-value>

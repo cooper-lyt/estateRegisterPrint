@@ -21,9 +21,16 @@ public class PowerCer {
     private Date dateTo;
     private PowerCard powerCard;
 
+    private String number;
 
+    private PowerCard.CardStatus status;
 
+    public PowerCer() {
+    }
 
+    public PowerCer(PowerCard.CardStatus status) {
+        this.status = status;
+    }
 
     @Id
     @Column(name = "ID", unique = true, nullable = false, length = 32)
@@ -102,5 +109,26 @@ public class PowerCer {
 
     public void setPowerCard(PowerCard powerCard) {
         this.powerCard = powerCard;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS",nullable = false,length = 32)
+    @NotNull
+    public PowerCard.CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PowerCard.CardStatus status) {
+        this.status = status;
+    }
+
+    @Column(name = "NUMBER", length = 100)
+    @Size(max = 100)
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

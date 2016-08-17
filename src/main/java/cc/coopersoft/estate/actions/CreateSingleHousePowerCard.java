@@ -76,6 +76,7 @@ public class CreateSingleHousePowerCard implements java.io.Serializable{
 
     }
 
+    @Transactional
     public String infoComplete(){
         powerCardHome.saveOrUpdate();
         endConversation();

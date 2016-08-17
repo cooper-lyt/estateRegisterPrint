@@ -54,33 +54,13 @@
         <b:row>
 
             <b:column offsetLg="2" offsetMd="2" offsetSm="1" offsetXs="0" colLg="8" colMd="8" colSm="10" colXs="12">
-                <div class="setup-header setup-gift">
-                    <h1 class="subhead-heading">房产出证</h1>
 
-                    <ol class="steps steps-4">
-                        <li class="complete">
-                            <b:iconAwesome name="check" size="2x"/>
-                            <strong class="step">土地:</strong>
-                            土地信息
-                        </li>
-                        <li class="complete">
-                            <b:iconAwesome name="check" size="2x"/>
-                            <strong class="step">房屋:</strong>
-                            房屋信息
-                        </li>
-                        <li class="complete">
-                            <b:iconAwesome name="check" size="2x"/>
-                            <strong class="step">权证:</strong>
-                            权证信息
-                        </li>
-                        <li class="current">
-                            <b:iconAwesome name="print" size="2x"/>
-                            <strong class="step">缮证:</strong>
-                            打印不动产权证
-                        </li>
-                    </ol>
+                <div class="subhead">
+                    <h2 class="subhead-heading">不动产登记证明</h2>
+                    <p class="subhead-description">
+
+                    </p>
                 </div>
-
 
                 <b:panel>
 
@@ -91,10 +71,10 @@
                         $('.extends_iframe').attr('src',printUrl);
                         }
                     </h:outputScript>
-                    <b:button styleClass="right" onclick="extPrint('ExtendsPrint://M#{powerCardHome.instance.id}');return false;" value="打印"/>
+                    <b:button styleClass="right" onclick="extPrint('ExtendsPrint://S#{powerCardHome.instance.id}');return false;" value="打印"/>
 
                     <p>
-                    <strong>辽</strong>(<strong>2016</strong>)<strong>凤城市</strong>不动产权第<strong>#{powerCerHome.instance.id}</strong>号
+                        <strong>辽</strong>(<strong>2016</strong>)<strong>凤城市</strong>不动产证明第<strong>#{powerCerHome.instance.id}</strong>号
                     </p>
 
                 </b:panel>
@@ -105,13 +85,13 @@
 
 
                 <hr/>
-                <b:commandButton action="#{powerCardHome.printComplate}" look="success" value="完成"/>
+                <b:commandButton action="#{powerCerHome.printComplate}" look="success" value="完成"/>
 
             </b:column>
 
         </b:row>
 
-   </o:form>
+    </o:form>
 
 
 </ui:composition>

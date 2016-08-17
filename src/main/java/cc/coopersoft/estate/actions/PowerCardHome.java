@@ -9,8 +9,6 @@ import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-import javax.enterprise.context.Conversation;
 import javax.enterprise.context.ConversationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Default;
@@ -19,6 +17,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.ws.rs.Path;
 import java.util.*;
 
 /**
@@ -52,7 +51,7 @@ public class PowerCardHome extends EntityHome<PowerCard,String> {
     private List<Persion> personList;
 
     protected PowerCard createInstance() {
-        return new PowerCard(PowerCard.OwnerType.SINGLE);
+        return new PowerCard(PowerCard.OwnerType.SINGLE, PowerCard.CardStatus.PREPARE);
     }
 
     protected EntityRepository<PowerCard, String> getEntityRepository() {
@@ -84,6 +83,13 @@ public class PowerCardHome extends EntityHome<PowerCard,String> {
     @PostConstruct
     public void initParam(){
         setId(facesContext.getExternalContext().getRequestParameterMap().get("powerCardId"));
+    }
+
+    @Transactional
+    public String printComplate(){
+        getInstance().setStatus(PowerCard.CardStatus.PRINTED);
+        saveOrUpdate();
+        return "/home.xhtml";
     }
 
 }

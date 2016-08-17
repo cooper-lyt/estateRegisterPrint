@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:co="http://coopersoft.cc/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <ui:define name="custom-header">
+
+        <h:outputStylesheet library="bootstrap-datepicker" name="css/bootstrap-datetimepicker.min.css"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/bootstrap-datetimepicker.min.js"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/locales/bootstrap-datetimepicker.zh-CN.js"/>
+
+
+        <h:outputScript>
+
+        $(document).ready(function () {
+        $('.js-datepicker').datetimepicker({
+        language: "zh-CN",
+        format: 'yyyy-mm-dd',
+        weekStart: 1,
+        todayBtn: 1,
+        autoclose: 1,
+        todayHighlight: 1,
+        startView: 2,
+        minView: 2,
+        forceParse: 0
+        });
+
+
+        });
+        </h:outputScript>
+
+    </ui:define>
+
+    <b:messages globalOnly="false" styleClass="top-messages"/>
+
+    <h:form styleClass="page-form">
+        <b:row>
+
+            <b:column offsetLg="2" offsetMd="2" offsetSm="1" offsetXs="0" colLg="8" colMd="8" colSm="10" colXs="12">
+                <div class="subhead">
+                    <h2 class="subhead-heading">不动产登记证明</h2>
+                    <p class="subhead-description">
+
+                    </p>
+                </div>
+
+
+                <b:inputText label="不动产权证号" required="true" value="#{createPowerCer.houseId}">
+                </b:inputText>
+                <b:message/>
+                <b:inputText label="不动产权证明号" required="true" value="#{powerCerHome.instance.id}">
+                </b:inputText>
+                <b:message/>
+
+                <p:outputPanel id="landTimeLimit">
+                    <div class="form-group">
+
+                        <h:outputLabel value="抵押期限" styleClass="bf-required"/>
+
+                        <div class="input-group">
+                            <h:inputText label="抵押期限始" styleClass="form-control js-datepicker" value="#{powerCerHome.instance.dateFrom}">
+                                <f:convertDateTime timeZone="#{i18n.timeZone}" locale="#{i18n.locale}" pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                            <span class="input-group-addon" id="basic-addon2">至</span>
+
+                            <h:inputText label="抵押期限止" styleClass="form-control js-datepicker" value="#{powerCerHome.instance.dateTo}">
+                                <f:convertDateTime timeZone="#{i18n.timeZone}" locale="#{i18n.locale}" pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                        </div>
+
+                    </div>
+
+                </p:outputPanel>
+
+                <b:inputText label="权利人(申请人)" required="true" value="#{powerCerHome.instance.powerPerson}"/>
+                <b:message/>
+
+                <b:inputText label="抵押方式" required="true" value="#{powerCerHome.instance.powerType}"/>
+                <b:message/>
+
+                <b:inputText label="债权数额" required="true" value="#{powerCerHome.instance.money}">
+                    <f:convertNumber pattern="#0.00"/>
+                </b:inputText>
+                <b:message/>
+
+
+
+
+                <hr/>
+                <b:commandButton action="#{createPowerCer.savePowerCerInfo}" look="success" value="继续"/>
+
+            </b:column>
+
+        </b:row>
+
+    </h:form>
+
+
+</ui:composition>
