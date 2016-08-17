@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <ui:define name="custom-header">
+        <h:outputStylesheet library="bootstrap-datepicker" name="css/bootstrap-datetimepicker.min.css"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/bootstrap-datetimepicker.min.js"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/locales/bootstrap-datetimepicker.zh-CN.js"/>
+
+        <h:outputStylesheet library="bootstrap-select" name="css/bootstrap-select.min.css"/>
+        <h:outputStylesheet library="bootstrap-select" name="css/bootstrap-select-plug.css"/>
+        <h:outputScript library="bootstrap-select" name="js/bootstrap-select.min.js"/>
+        <h:outputScript library="bootstrap-select" name="js/i18n/defaults-zh_CN.min.js"/>
+
+        <h:outputScript>
+
+            $(document).ready(function () {
+            $('.js-datepicker').datetimepicker({
+            language: "zh-CN",
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+            });
+
+            $('.js-select').selectpicker();
+
+            });
+
+
+        </h:outputScript>
+
+        <f:metadata>
+            <o:viewAction action="#{createSingleHousePowerCard.begin}" onPostback="false"/>
+
+        </f:metadata>
+    </ui:define>
+
+    <b:messages globalOnly="false" styleClass="top-messages"/>
+
+    <h:form styleClass="page-form">
+        <b:row>
+
+            <b:column offsetLg="2" offsetMd="2" offsetSm="1" offsetXs="0" colLg="8" colMd="8" colSm="10" colXs="12">
+                <div class="setup-header setup-gift">
+                    <h1 class="subhead-heading">房产出证</h1>
+
+                    <ol class="steps steps-4">
+                        <li class="complete">
+                            <b:iconAwesome name="check" size="2x"/>
+                            <strong class="step">土地:</strong>
+                            土地信息
+                        </li>
+                        <li class="complete">
+                            <b:iconAwesome name="check" size="2x"/>
+                            <strong class="step">房屋:</strong>
+                            房屋信息
+                        </li>
+                        <li class="current">
+                            <b:iconAwesome name="newspaper-o" size="2x"/>
+                            <strong class="step">权证:</strong>
+                            权证信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="print" size="2x"/>
+                            <strong class="step">缮证:</strong>
+                            打印不动产权证
+                        </li>
+                    </ol>
+                </div>
+
+
+                <b:inputText label="证号" required="true" value="#{powerCardHome.instance.id}">
+                </b:inputText>
+                <b:message/>
+
+                <ui:repeat value="#{powerCardHome.personList}" var="_person">
+                    <b:panel>
+                        <h:inputText value="#{_person.number}" label="身份证号" required="true"/>
+                        <b:message/>
+                        <h:inputText value="#{_person.name}" label="姓名" required="true"/>
+                        <b:message/>
+                        <h:inputText value="#{_person.poolArea}" label="共有面积" required="true"
+                                     rendered="#{(powerCardHome.instance.ownerType eq 'POOL_PER')}">
+                            <f:convertNumber pattern="#0.00"/>
+                        </h:inputText>
+                        <b:message/>
+
+                    </b:panel>
+                </ui:repeat>
+
+                <hr/>
+                <b:commandButton action="#{createSingleHousePowerCard.infoComplete}" look="success" value="继续"/>
+
+            </b:column>
+
+        </b:row>
+
+    </h:form>
+
+
+</ui:composition>

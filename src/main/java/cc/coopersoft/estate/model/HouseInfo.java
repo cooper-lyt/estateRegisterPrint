@@ -35,6 +35,13 @@ public class HouseInfo implements java.io.Serializable{
 
     private PowerCard powerCard;
 
+    public HouseInfo() {
+    }
+
+    public HouseInfo(PowerCard powerCard) {
+        this.powerCard = powerCard;
+    }
+
     @Id
     @Column(name = "ID", unique = true, nullable = false, length = 28)
     @NotNull

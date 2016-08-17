@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:co="http://coopersoft.cc/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <ui:define name="custom-header">
+
+        <h:outputStylesheet library="bootstrap-select" name="css/bootstrap-select.min.css"/>
+        <h:outputStylesheet library="bootstrap-select" name="css/bootstrap-select-plug.css"/>
+        <h:outputScript library="bootstrap-select" name="js/bootstrap-select.min.js"/>
+        <h:outputScript library="bootstrap-select" name="js/i18n/defaults-zh_CN.min.js"/>
+
+        <h:outputScript library="bsf" name="js/dropdown.js" target="head"/>
+        <h:outputScript>
+
+            $(document).ready(function () {
+                $('.js-select').selectpicker();
+            });
+
+
+
+        </h:outputScript>
+
+        <f:metadata>
+            <o:viewAction action="#{createSingleHousePowerCard.begin}" onPostback="false"/>
+
+        </f:metadata>
+    </ui:define>
+
+    <b:messages globalOnly="false" styleClass="top-messages"/>
+
+    <h:form styleClass="page-form">
+        <b:row>
+
+            <b:column offsetLg="2" offsetMd="2" offsetSm="1" offsetXs="0" colLg="8" colMd="8" colSm="10" colXs="12">
+                <div class="setup-header setup-gift">
+                    <h1 class="subhead-heading">房产出证</h1>
+
+                    <ol class="steps steps-4">
+                        <li class="complete">
+                            <b:iconAwesome name="check" size="2x"/>
+                            <strong class="step">土地:</strong>
+                            土地信息
+                        </li>
+                        <li class="current">
+                            <b:iconAwesome name="home" size="2x"/>
+                            <strong class="step">房屋:</strong>
+                            房屋信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="newspaper-o" size="2x"/>
+                            <strong class="step">权证:</strong>
+                            权证信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="print" size="2x"/>
+                            <strong class="step">缮证:</strong>
+                            打印不动产权证
+                        </li>
+                    </ol>
+                </div>
+
+
+                <b:inputText label="不动产单元号" required="true" value="#{createSingleHousePowerCard.houseInfo.id}">
+                </b:inputText>
+                <b:message/>
+
+
+                <p:outputPanel id="poolTypeField">
+                    <div class="form-group">
+                        <h:outputLabel for="poolType" value="共有情况" styleClass="bf-required"/>
+
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                        <h:selectOneMenu id="poolType" value="#{powerCardHome.instance.ownerType}"
+                                         label="共有情况"
+                                         converter="omnifaces.GenericEnumConverter"
+                                         pt:data-width="200px"
+                                         pt:data-header="请选择共有情况"
+                                         pt:data-size="auto"
+
+                                         styleClass="js-select form-control edit-select select-theme">
+                            <f:selectItems value="#{ownerTypeList}" var="_type" itemLabel="#{enumHelper.getLabel(_type)}"
+                                           itemValue="#{_type}"/>
+                            <f:ajax event="valueChange" execute="@this" render="poolCount"/>
+                        </h:selectOneMenu>
+                        </span>
+                        <h:inputText id="poolCount" disabled="#{(powerCardHome.instance.ownerType eq 'SINGLE')}"
+                                     required="true"
+                                     label="共有人数量" styleClass="form-control" value="#{createSingleHousePowerCard.poolOwnerCount}"/>
+                        </div>
+                    </div>
+                    <b:message for="poolType"/>
+                </p:outputPanel>
+
+                <b:inputText label="房屋坐落" required="true" value="#{createSingleHousePowerCard.houseInfo.houseAddress}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="权利类型" required="true" value="#{createSingleHousePowerCard.houseInfo.housePowerType}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="权利性质" required="true" value="#{createSingleHousePowerCard.houseInfo.housePowerProperty}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="用途" required="true" value="#{createSingleHousePowerCard.houseInfo.houseUseType}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="面积" required="true" value="#{createSingleHousePowerCard.houseInfo.houseArea}">
+                    <f:convertNumber pattern="#0.00"/>
+                </b:inputText>
+                <b:message/>
+
+
+                <b:inputText label="房屋结构" value="#{createSingleHousePowerCard.houseInfo.houseStruct}">
+                </b:inputText>
+                <b:message/>
+                <b:inputText label="专有面积" value="#{createSingleHousePowerCard.houseInfo.useArea}">
+                    <f:convertNumber pattern="#0.00"/>
+                </b:inputText>
+                <b:message/>
+                <b:inputText label="分摊面积"  value="#{createSingleHousePowerCard.houseInfo.commArea}">
+                    <f:convertNumber pattern="#0.00"/>
+                </b:inputText>
+                <b:message/>
+                <b:inputText label="总层数" value="#{createSingleHousePowerCard.houseInfo.floorCount}">
+                    <f:converter converterId="javax.faces.Integer"/>
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="所在层" value="#{createSingleHousePowerCard.houseInfo.inFloorName}">
+                </b:inputText>
+                <b:message/>
+
+                <hr/>
+                <b:commandButton action="#{createSingleHousePowerCard.genPerson}" look="success" value="继续"/>
+
+            </b:column>
+
+        </b:row>
+
+    </h:form>
+
+
+</ui:composition>

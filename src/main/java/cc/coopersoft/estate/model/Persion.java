@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.util.UUID;
 
 /**
  * Created by cooper on 8/16/16.
@@ -14,8 +15,20 @@ public class Persion implements java.io.Serializable{
     private String id;
     private String name;
     private BigDecimal poolArea;
+    private String number;
 
     private PowerCard powerCard;
+
+
+
+    public Persion() {
+    }
+
+
+    public Persion(String id, PowerCard powerCard) {
+        this.id = id;
+        this.powerCard = powerCard;
+    }
 
     @Id
     @Column(name = "ID", unique = true, nullable = false, length = 128)
@@ -49,6 +62,17 @@ public class Persion implements java.io.Serializable{
         this.poolArea = poolArea;
     }
 
+    @Column(name = "NUMBER",nullable = false, length = 50)
+    @NotNull
+    @Size(max = 50)
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "CARD", nullable = false)
     @NotNull
@@ -59,4 +83,5 @@ public class Persion implements java.io.Serializable{
     public void setPowerCard(PowerCard powerCard) {
         this.powerCard = powerCard;
     }
+
 }

@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<ui:composition template="/applayout/pageTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:b="http://bootsfaces.net/ui"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+                xmlns:o="http://omnifaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <ui:define name="custom-header">
+        <h:outputStylesheet library="bootstrap-datepicker" name="css/bootstrap-datetimepicker.min.css"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/bootstrap-datetimepicker.min.js"/>
+        <h:outputScript library="bootstrap-datepicker" name="js/locales/bootstrap-datetimepicker.zh-CN.js"/>
+
+
+        <h:outputScript>
+
+            $(document).ready(function () {
+            $('.js-datepicker').datetimepicker({
+            language: "zh-CN",
+            format: 'yyyy-mm-dd',
+            weekStart: 1,
+            todayBtn: 1,
+            autoclose: 1,
+            todayHighlight: 1,
+            startView: 2,
+            minView: 2,
+            forceParse: 0
+            });
+
+
+            });
+
+
+        </h:outputScript>
+
+        <f:metadata>
+            <o:viewAction action="#{createSingleHousePowerCard.begin}" onPostback="false"/>
+
+        </f:metadata>
+    </ui:define>
+
+    <b:messages globalOnly="false" styleClass="top-messages"/>
+
+    <h:form styleClass="page-form">
+        <b:row>
+
+            <b:column offsetLg="2" offsetMd="2" offsetSm="1" offsetXs="0" colLg="8" colMd="8" colSm="10" colXs="12">
+                <div class="setup-header setup-gift">
+                    <h1 class="subhead-heading">房产出证</h1>
+
+                    <ol class="steps steps-4">
+                        <li class="current">
+                            <b:iconAwesome name="map-o" size="2x"/>
+                            <strong class="step">土地:</strong>
+                            土地信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="home" size="2x"/>
+                            <strong class="step">房屋:</strong>
+                            房屋信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="newspaper-o" size="2x"/>
+                            <strong class="step">权证:</strong>
+                            权证信息
+                        </li>
+                        <li>
+                            <b:iconAwesome name="print" size="2x"/>
+                            <strong class="step">缮证:</strong>
+                            打印不动产权证
+                        </li>
+                    </ol>
+                </div>
+
+
+
+                <b:inputText label="土地坐落" required="true" value="#{createSingleHousePowerCard.houseInfo.landAddress}">
+                </b:inputText>
+                <b:message/>
+
+                <p:outputPanel id="landTimeLimit">
+                    <div class="form-group">
+
+                        <h:outputLabel value="使用期限" styleClass="bf-required"/>
+
+                        <div class="input-group">
+                            <h:inputText label="使用期限始" styleClass="form-control js-datepicker" value="#{createSingleHousePowerCard.houseInfo.landDateFrom}">
+                                <f:convertDateTime timeZone="#{i18n.timeZone}" locale="#{i18n.locale}" pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                            <span class="input-group-addon" id="basic-addon2">至</span>
+
+                            <h:inputText label="使用期限止" styleClass="form-control js-datepicker" value="#{createSingleHousePowerCard.houseInfo.landDateTo}">
+                                <f:convertDateTime timeZone="#{i18n.timeZone}" locale="#{i18n.locale}" pattern="yyyy-MM-dd"/>
+                            </h:inputText>
+                        </div>
+
+                    </div>
+
+                </p:outputPanel>
+
+                <b:inputText label="权利类型" required="true" value="#{createSingleHousePowerCard.houseInfo.landPowerType}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="权利性质" required="true" value="#{createSingleHousePowerCard.houseInfo.landPowerProperty}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="用途" required="true" value="#{createSingleHousePowerCard.houseInfo.landUseType}">
+                </b:inputText>
+                <b:message/>
+
+                <b:inputText label="面积" required="true" value="#{createSingleHousePowerCard.houseInfo.landArea}">
+                    <f:convertNumber pattern="#0.00"/>
+                </b:inputText>
+                <b:message/>
+
+
+
+
+
+
+                <hr/>
+                <b:commandButton action="/esate/createHouseInfo.xhtml" look="success" value="继续"/>
+
+            </b:column>
+
+        </b:row>
+
+    </h:form>
+
+
+</ui:composition>

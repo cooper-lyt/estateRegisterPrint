@@ -17,13 +17,25 @@ public class PowerCard implements java.io.Serializable{
         SINGLE,POOL_TOG,POOL_PER
     }
 
+    public enum CardStatus{
+        PREPARE,PRINTED
+    }
+
     private String id;
 
+    private CardStatus status;
     private OwnerType ownerType;
 
     private Set<HouseInfo> houseInfos = new HashSet<HouseInfo>(0);
     private Set<Persion> persions = new HashSet<Persion>(0);
     private Set<PowerCer> powerCers = new HashSet<PowerCer>(0);
+
+    public PowerCard() {
+    }
+
+    public PowerCard(OwnerType ownerType) {
+        this.ownerType = ownerType;
+    }
 
     @Id
     @Column(name = "ID", unique = true, nullable = false, length = 32)
@@ -46,6 +58,17 @@ public class PowerCard implements java.io.Serializable{
 
     public void setOwnerType(OwnerType ownerType) {
         this.ownerType = ownerType;
+    }
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "STATUS",nullable = false,length = 32)
+    @NotNull
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
     }
 
     @OneToMany(fetch = FetchType.LAZY,mappedBy = "powerCard",cascade = CascadeType.ALL)

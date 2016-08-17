@@ -21,6 +21,11 @@
     <b:navBar brand="凤城" brand-href="#{request.contextPath}/home.xhtml" position="top" sticky="true">
         <b:container>
 
+            <b:navbarLinks>
+                <b:navLink value="单一版房屋不动产权" href="#{request.contextPath}/esate/createLandInfo.xhtml"/>
+                <b:navLink value="不动产登记证明" href="#{request.contextPath}/esate/createLandinfo.xhtml"/>
+            </b:navbarLinks>
+
             <b:navbarLinks pull="right">
                 <b:navLink icon="sign-out" value="注销" href="#{request.contextPath}/logout"/>
             </b:navbarLinks>

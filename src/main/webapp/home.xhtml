@@ -9,17 +9,18 @@
 
 
     <b:row style="padding-top: 30px;">
-        <b:column colMd="12" pt:role="main" hidden="sm" styleClass="operation-list">
+        <b:column colMd="12" styleClass="operation-list">
 
             <div class="account-fun">
-            <b:dropButton value="#{identity.account.firstName} #{identity.account.lastName}">
-                <b:navLink iconAwesome="key" value="修改密码" href="#"></b:navLink>
-                <b:navLink iconAwesome="cog" value="帐户设置" href="#"></b:navLink>
-            </b:dropButton>
+                <b:dropButton value="#{identity.account.firstName} #{identity.account.lastName}">
+                    <b:navLink iconAwesome="key" value="修改密码" href="#"></b:navLink>
+                    <b:navLink iconAwesome="cog" value="帐户设置" href="#"></b:navLink>
+                </b:dropButton>
             </div>
 
 
         </b:column>
+
     </b:row>
 
 </ui:composition>
